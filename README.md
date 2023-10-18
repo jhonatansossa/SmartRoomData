@@ -1,0 +1,1 @@
+# SmartRoomData
