@@ -23,7 +23,7 @@ Using Smart Room Data project, we can call APIs with image or video to detect pr
 5. The application should run at http://127.0.0.1:5100
 
 
-## Call Api with Images
+## Call Detect Person Api with Images
 
 1. Make a post request at {Base URL}/detect_person using Postman
 
