@@ -23,9 +23,9 @@ def predict(model, img):
     return out_img, person_count
 
 
-class ImageUpload(Resource):
+class DetectPerson(Resource):
 
-    # Sample request: http://127.0.0.1:5100/upload -> Upload image through postman (form-data)
+    # Sample request: http://127.0.0.1:5100/detect_person -> Upload image through postman (form-data)
     def post(self):
         if 'file' not in request.files:
             return {'message': 'No file part'}, 400
@@ -36,7 +36,7 @@ class ImageUpload(Resource):
             return {'message': 'No selected file'}, 400
         
         try:
-            uploaded_image_path = 'inputs/image_1.png'
+            uploaded_image_path = 'inputs/upload_image_1.png'
             file.save(uploaded_image_path)
         except:
             return {'message': 'File Saving Error'}, 400
@@ -54,7 +54,7 @@ class ImageUpload(Resource):
         return {'person_count': person_count}, 200
 
 
-api.add_resource(ImageUpload, '/upload')
+api.add_resource(DetectPerson, '/detect_person')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5100)
