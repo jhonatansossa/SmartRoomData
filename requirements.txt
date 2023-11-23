@@ -31,3 +31,4 @@ tzdata==2023.3
 urllib3==2.1.0
 flask==2.3.3
 flask-cors==4.0.0
+flask-RESTful==0.3.10
