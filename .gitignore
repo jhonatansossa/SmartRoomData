@@ -2,3 +2,4 @@ venv/
 runs/
 *.pt
 __pycache__/
+inputs/
