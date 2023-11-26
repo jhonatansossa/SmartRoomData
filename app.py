@@ -25,6 +25,10 @@ def predict(model, img):
 
 class DetectPerson(Resource):
 
+    def __init__(self):
+        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
+
+
     # Sample request: http://127.0.0.1:5100/detect_person -> Upload image through postman (form-data)
     def post(self):
         if 'file' not in request.files:
@@ -41,11 +45,9 @@ class DetectPerson(Resource):
         except:
             return {'message': 'File Saving Error'}, 400
         
-        try:
-            model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
-    
+        try:   
             img = cv2.imread(uploaded_image_path)[..., ::-1]
-            out_img , person_count = predict(model,img)
+            out_img , person_count = predict(self.model, img)
 
             print('Persons detected :', person_count)
         except:

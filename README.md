@@ -10,7 +10,7 @@ Using Smart Room Data project, we can call APIs with image or video to detect pr
     * Real time Detection
 
 
-## Setup SFC_Model Locally
+## Setup SmartRoomData Locally
 
 1. Please clone the repository
 
