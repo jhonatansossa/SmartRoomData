@@ -18,9 +18,11 @@ Using Smart Room Data project, we can call APIs with image or video to detect pr
 
 3. Install the libraries from requirement.txt
 
-4. Run ``` python -u app.py``` command
+4. Please add the desired PyTorch model file and name it yolov5l.pt
 
-5. The application should run at http://127.0.0.1:5100
+5. Run ``` python -u app.py``` command
+
+6. The application should run at http://127.0.0.1:5100
 
 
 ## Call Detect Person Api with Images
@@ -37,5 +39,6 @@ Using Smart Room Data project, we can call APIs with image or video to detect pr
 ## Tech Stack Used
 
     - Flask
+    - PyTorch
     - Computer Vison
     - Machine Learning
