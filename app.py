@@ -1,6 +1,7 @@
 import cv2
 import torch
 from PIL import Image
+from defisheye import Defisheye
 
 from flask import Flask, request
 from flask_restful import Api, Resource
@@ -29,6 +30,18 @@ class DetectPerson(Resource):
         self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
 
 
+    def convert_fisheye_image(self, image_path):
+        dtype = 'linear'
+        format = 'fullframe'
+        fov = 180
+        pfov = 120
+
+        obj = Defisheye(image_path, dtype=dtype, format=format, fov=fov, pfov=pfov)
+        new_image = obj.convert()
+
+        return new_image
+
+
     # Sample request: http://127.0.0.1:5100/detect_person -> Upload image through postman (form-data)
     def post(self):
         if 'file' not in request.files:
@@ -44,6 +57,13 @@ class DetectPerson(Resource):
             file.save(uploaded_image_path)
         except:
             return {'message': 'File Saving Error'}, 400
+
+        try:
+            new_image_arr = self.convert_fisheye_image(uploaded_image_path)
+            im = Image.fromarray(new_image_arr)
+            im.save(uploaded_image_path)
+        except:
+            return {'message': 'Image Conversion error'}, 400
         
         try:   
             img = cv2.imread(uploaded_image_path)[..., ::-1]
