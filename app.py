@@ -9,6 +9,7 @@ from flask_restful import Api, Resource
 app = Flask(__name__)
 api = Api(app)
 
+model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
 
 def predict(model, img):
 
@@ -26,8 +27,8 @@ def predict(model, img):
 
 class DetectPerson(Resource):
 
-    def __init__(self):
-        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
+    #def __init__(self):
+        #self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
 
 
     def convert_fisheye_image(self, image_path):
@@ -67,7 +68,7 @@ class DetectPerson(Resource):
         
         try:   
             img = cv2.imread(uploaded_image_path)[..., ::-1]
-            out_img , person_count = predict(self.model, img)
+            out_img , person_count = predict(model, img)
 
             print('Persons detected :', person_count)
         except:
