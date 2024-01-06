@@ -26,12 +26,12 @@ def predict(model, img):
 
 class DetectPerson(Resource):
 
-    def __init__(self):
+    #def __init__(self):
         #self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
 
 
     def convert_fisheye_image(self, image_path):
-        dtype = 'linear'
+        dtype = 'equalarea'
         format = 'fullframe'
         fov = 180
         pfov = 120
