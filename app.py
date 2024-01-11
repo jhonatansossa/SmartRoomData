@@ -26,12 +26,12 @@ def predict(model, img):
 
 class DetectPerson(Resource):
 
-    def __init__(self):
-        self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
+    #def __init__(self):
+        #self.model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
 
 
     def convert_fisheye_image(self, image_path):
-        dtype = 'linear'
+        dtype = 'equalarea'
         format = 'fullframe'
         fov = 180
         pfov = 120
@@ -67,7 +67,7 @@ class DetectPerson(Resource):
         
         try:   
             img = cv2.imread(uploaded_image_path)[..., ::-1]
-            out_img , person_count = predict(self.model, img)
+            out_img , person_count = predict(model, img)
 
             print('Persons detected :', person_count)
         except:
@@ -79,4 +79,5 @@ class DetectPerson(Resource):
 api.add_resource(DetectPerson, '/detect_person')
 
 if __name__ == '__main__':
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
     app.run(host='0.0.0.0', port=5100)
