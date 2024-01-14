@@ -80,4 +80,5 @@ api.add_resource(DetectPerson, '/detect_person')
 
 if __name__ == '__main__':
     model = torch.hub.load('ultralytics/yolov5', 'yolov5l')
+    model.classes=[0]
     app.run(host='0.0.0.0', port=5100)
