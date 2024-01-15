@@ -13,8 +13,9 @@ api = Api(app)
 def predict(model, img):
 
     out_img = img.copy()
-    results = model([img], size=800) 
-    results.save()
+    results = model([img], size=800)
+    # Following line will save the result image in "exp" folder.
+    # results.save()
     person_count = 0
     for det in results.xyxy[0]:
         x1, y1, x2, y2, conf, cls = det
@@ -67,6 +68,7 @@ class DetectPerson(Resource):
         
         try:   
             img = cv2.imread(uploaded_image_path)[..., ::-1]
+            # The out_img here is the image with bounding boxes drawn only on persons
             out_img , person_count = predict(model, img)
 
             print('Persons detected :', person_count)
